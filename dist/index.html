@@ -349,8 +349,8 @@
                 </div>
 
                 <div class="hidden md:flex items-center space-x-8">
-                    <a href="#about" class="mobile-link text-xl text-stone-700 hover:text-amber-600 transition-colors duration-300">About</a>
-            <a href="#portfolio" class="mobile-link text-xl text-stone-700 hover:text-amber-600 transition-colors duration-300">Portfolio</a>
+                    <a href="#about" class="mobile-link text-md text-stone-700 hover:text-amber-600 transition-colors duration-300">About</a>
+                <a href="#portfolio" class="mobile-link text-md text-stone-700 hover:text-amber-600 transition-colors duration-300">Portfolio</a>
             
                     <a href="#contact" class="btn-primary px-6 py-2 rounded-full hover:scale-105 transition-transform duration-300 shadow-md">Contact</a>
                 </div>
@@ -368,9 +368,9 @@
         <div class="flex flex-col items-start p-8 mt-20 space-y-6">
            
             
-            <a href="#about" class="mobile-link text-xl text-stone-700 hover:text-amber-600 transition-colors duration-300">About</a>
-            <a href="#portfolio" class="mobile-link text-xl text-stone-700 hover:text-amber-600 transition-colors duration-300">Portfolio</a>
-            <a href="#contact" class="mobile-link text-xl text-stone-700 hover:text-amber-600 transition-colors duration-300">Contact</a>
+            <a href="#about" class="mobile-link text-xl text-stone-700 hover:text-amber-600 transition-colors duration-300 ">About</a>
+            <a href="#portfolio" class="mobile-link text-xl text-stone-700 hover:text-amber-600 transition-colors duration-300 ">Portfolio</a>
+            <a href="#contact" class="mobile-link text-xl text-stone-700 hover:text-amber-600 transition-colors duration-300 ">Contact</a>
         </div>
     </div>
 
@@ -852,8 +852,8 @@
             <div class="grid md:grid-cols-4 gap-8 mb-8">
                 <div>
                     <div class="flex items-center space-x-3 mb-4">
-                        <img src="img/logo.jpg" alt="Q-Photo" class="h-10 w-10 rounded-full object-cover border border-amber-700">
-                        <span class="font-display text-xl font-bold text-stone-100">Q-Photo</span>
+                        <a href="#hero"><img src="img/logo.jpg" alt="Q-Photo" class="h-10 w-10 rounded-full object-cover border border-amber-700">
+                        <span class="font-display text-xl font-bold text-stone-100">Q-Photo</span></a>
                     </div>
                     <p class="text-stone-400 text-sm">Capturing the spirit of equestrian excellence, one moment at a time.</p>
                 </div>
@@ -863,9 +863,9 @@
                     <div class="space-y-2">
                         
                         
-                        <a href="#about" class="block text-stone-400 hover:text-amber-500 transition-colors">About</a>
-                        <a href="#portfolio" class="block text-stone-400 hover:text-amber-500 transition-colors">Portfolio</a>
-                        <a href="#contact" class="block text-stone-400 hover:text-amber-500 transition-colors">Contact</a>
+                        <a href="#about" class="block text-stone-400 hover:text-amber-500 transition-colors text-sm">About</a>
+                        <a href="#portfolio" class="block text-stone-400 hover:text-amber-500 transition-colors text-sm">Portfolio</a>
+                        <a href="#contact" class="block text-stone-400 hover:text-amber-500 transition-colors text-sm">Contact</a>
                     </div>
                 </div>
 
@@ -1019,6 +1019,27 @@
         const filterBtnContainer = document.getElementById('filterBtnContainer');
         const filterBtns = filterBtnContainer.querySelectorAll('.filter-btn');
         const portfolioItems = document.querySelectorAll('.masonry-item');
+        const masonryContainer = document.querySelector('.masonry');
+
+        // Store original order
+        const originalOrder = Array.from(portfolioItems);
+
+        // Function to shuffle array
+        function shuffleArray(array) {
+            const shuffled = [...array];
+            for (let i = shuffled.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
+            }
+            return shuffled;
+        }
+
+        // Function to reorder DOM elements
+        function reorderItems(itemsArray) {
+            itemsArray.forEach(item => {
+                masonryContainer.appendChild(item);
+            });
+        }
 
         filterBtnContainer.addEventListener('click', (e) => {
             if (e.target.classList.contains('filter-btn')) {
@@ -1038,6 +1059,14 @@
                         item.classList.add('hide-filter');
                     }
                 });
+
+                // Shuffle if 'all' is selected, otherwise restore original order
+                if (filterValue === 'all') {
+                    const shuffledItems = shuffleArray(originalOrder);
+                    reorderItems(shuffledItems);
+                } else {
+                    reorderItems(originalOrder);
+                }
             }
         });
 
