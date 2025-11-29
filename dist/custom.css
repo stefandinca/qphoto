@@ -1,0 +1,323 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Inter', sans-serif;
+    overflow-x: hidden;
+    background: #fafaf9; /* Stone-50 (Off-white) */
+    color: #44403c; /* Stone-700 (Dark warm gray) */
+}
+
+.font-display {
+    font-family: 'Playfair Display', serif;
+}
+
+/* Glassmorphism - Light Mode Version */
+.glass {
+    background: rgba(255, 255, 255, 0.6);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid rgba(120, 53, 15, 0.1); /* Slight brown border */
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.05);
+}
+
+.glass-dark {
+    background: rgba(255, 255, 255, 0.8);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid rgba(180, 83, 9, 0.1);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+}
+
+/* Animated Gradient - Gold/Amber Theme */
+.gradient-animate {
+    background: linear-gradient(45deg, #d97706, #f59e0b, #b45309, #92400e);
+    background-size: 400% 400%;
+    animation: gradientShift 15s ease infinite;
+}
+
+@keyframes gradientShift {
+    0%, 100% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+}
+
+/* Reveal Animation */
+.reveal {
+    opacity: 0;
+    transform: translateY(50px);
+    transition: all 0.8s cubic-bezier(0.65, 0, 0.35, 1);
+}
+
+.reveal.active {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Parallax */
+.parallax {
+    transition: transform 0.5s cubic-bezier(0.65, 0, 0.35, 1);
+}
+
+/* Image Hover Effect */
+.img-container {
+    overflow: hidden;
+    position: relative;
+    border-radius: 0.5rem;
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+    cursor: pointer;
+}
+
+.img-container img {
+    transition: transform 0.7s cubic-bezier(0.65, 0, 0.35, 1);
+}
+
+.img-container:hover img {
+    transform: scale(1.1) rotate(2deg);
+}
+
+.img-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(45deg, rgba(217, 119, 6, 0.7), rgba(146, 64, 14, 0.7));
+    opacity: 0;
+    transition: opacity 0.5s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.img-container:hover .img-overlay {
+    opacity: 1;
+}
+
+/* Text Animation */
+.text-reveal {
+    display: inline-block;
+    overflow: hidden;
+}
+
+.text-reveal span {
+    display: inline-block;
+    animation: slideUp 0.8s cubic-bezier(0.65, 0, 0.35, 1) forwards;
+    opacity: 0;
+    transform: translateY(100%);
+}
+
+@keyframes slideUp {
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Stagger animation delays */
+.text-reveal span:nth-child(1) { animation-delay: 0.1s; }
+.text-reveal span:nth-child(2) { animation-delay: 0.2s; }
+.text-reveal span:nth-child(3) { animation-delay: 0.3s; }
+.text-reveal span:nth-child(4) { animation-delay: 0.4s; }
+
+/* Floating Animation */
+@keyframes float {
+    0%, 100% { transform: translateY(0px); }
+    50% { transform: translateY(-20px); }
+}
+
+.float {
+    animation: float 6s ease-in-out infinite;
+}
+
+/* Logo Animation */
+.logo-rotate {
+    transition: transform 0.6s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+    border: 2px solid #b45309;
+}
+
+.logo-rotate:hover {
+    transform: rotate(360deg) scale(1.1);
+}
+
+/* Nav Blur */
+.nav-blur {
+    background: rgba(250, 250, 249, 0.8);
+    backdrop-filter: blur(15px);
+    -webkit-backdrop-filter: blur(15px);
+    border-bottom: 1px solid rgba(120, 53, 15, 0.05);
+}
+
+/* Button Hover */
+.btn-primary {
+    position: relative;
+    overflow: hidden;
+    transition: all 0.4s ease;
+    background: linear-gradient(90deg, #b45309, #d97706);
+    color: white;
+}
+
+.btn-primary::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.4), transparent);
+    transition: left 0.5s ease;
+}
+
+.btn-primary:hover::before {
+    left: 100%;
+}
+
+/* Lightbox */
+.lightbox {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(250, 250, 249, 0.98);
+    z-index: 10000;
+    align-items: center;
+    justify-content: center;
+    animation: fadeIn 0.3s ease;
+}
+
+.lightbox.active {
+    display: flex;
+}
+
+.lightbox img {
+    max-width: 90%;
+    max-height: 90vh;
+    object-fit: contain;
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+    animation: zoomIn 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+@keyframes zoomIn {
+    from { transform: scale(0.8); opacity: 0; }
+    to { transform: scale(1); opacity: 1; }
+}
+
+/* Scroll Progress Bar */
+.scroll-progress {
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 4px;
+    background: linear-gradient(90deg, #92400e, #d97706, #f59e0b);
+    z-index: 9999;
+    transform-origin: left;
+    transition: transform 0.1s ease;
+}
+
+/* Grid Hover */
+.grid-item {
+    transition: all 0.4s cubic-bezier(0.65, 0, 0.35, 1);
+}
+
+.grid-item:hover {
+    transform: translateY(-10px);
+    z-index: 10;
+}
+
+/* Form Focus */
+.form-input {
+    background: #ffffff;
+    border: 1px solid #e7e5e4;
+    color: #44403c;
+}
+.form-input:focus {
+    outline: none;
+    border-color: #d97706;
+    box-shadow: 0 0 0 3px rgba(217, 119, 6, 0.1);
+}
+
+/* Magnetic Button Effect */
+.magnetic {
+    transition: transform 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+}
+
+/* Scrollbar */
+::-webkit-scrollbar {
+    width: 10px;
+}
+
+::-webkit-scrollbar-track {
+    background: #fafaf9;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #d6d3d1;
+    border-radius: 10px;
+    border: 2px solid #fafaf9;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #a8a29e;
+}
+
+/* Mobile Nav */
+.mobile-menu {
+    transform: translateX(100%);
+    transition: transform 0.4s cubic-bezier(0.65, 0, 0.35, 1);
+    background: rgba(255, 255, 255, 0.95);
+    border-left: 1px solid rgba(0,0,0,0.05);
+}
+
+.mobile-menu.active {
+    transform: translateX(0);
+}
+
+/* Masonry Grid */
+.masonry {
+    column-count: 3;
+    column-gap: 1.5rem;
+}
+
+.masonry-item {
+    break-inside: avoid;
+    margin-bottom: 1.5rem;
+    transition: all 0.4s cubic-bezier(0.65, 0, 0.35, 1);
+}
+
+@media (max-width: 1024px) {
+    .masonry {
+        column-count: 2;
+    }
+}
+
+@media (max-width: 640px) {
+    .masonry {
+        column-count: 1;
+    }
+}
+
+/* Filter Button Styles */
+.filter-btn {
+    background: white;
+    border: 1px solid #e7e5e4;
+    color: #57534e;
+    transition: all 0.3s ease;
+}
+.filter-btn:hover {
+    border-color: #d97706;
+    color: #b45309;
+}
+.filter-btn.active {
+    background: linear-gradient(90deg, #b45309, #d97706);
+    color: white;
+    border-color: transparent;
+    box-shadow: 0 4px 12px rgba(180, 83, 9, 0.2);
+}
+
+/* Class to hide filtered items */
+.masonry-item.hide-filter {
+    display: none;
+}
